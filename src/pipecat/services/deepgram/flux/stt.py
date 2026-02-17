@@ -438,7 +438,7 @@ class DeepgramFluxSTTService(WebsocketSTTService):
         # until we receive the first transcript. However, Deepgram Flux delivers
         # both the "user started speaking" event and the first transcript simultaneously,
         # making this timing measurement meaningless in this context.
-        # await self.start_ttfb_metrics()
+        await self.start_ttfb_metrics()
         await self.start_processing_metrics()
 
     @traced_stt
@@ -765,5 +765,5 @@ class DeepgramFluxSTTService(WebsocketSTTService):
             # until we receive the first transcript. However, Deepgram Flux delivers
             # both the "user started speaking" event and the first transcript simultaneously,
             # making this timing measurement meaningless in this context.
-            # await self.stop_ttfb_metrics()
+            await self.stop_ttfb_metrics()
             await self._call_event_handler("on_update", transcript)
