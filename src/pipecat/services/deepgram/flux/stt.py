@@ -748,7 +748,7 @@ class DeepgramFluxSTTService(WebsocketSTTService):
                     self._user_id,
                     time_now_iso8601(),
                     self._language,
-                    result=data,
+                    result=None,
                 )
             )
             
