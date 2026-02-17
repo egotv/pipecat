@@ -760,6 +760,17 @@ class DeepgramFluxSTTService(WebsocketSTTService):
         """
         if transcript:
             logger.trace(f"Update event: {transcript}")
+
+            await self.push_frame(
+                InterimTranscriptionFrame(
+                    transcript,
+                    self._user_id,
+                    time_now_iso8601(),
+                    self._language,
+                    result=data,
+                )
+            )
+            
             # TTFB (Time To First Byte) metrics are currently disabled for Deepgram Flux.
             # Ideally, TTFB should measure the time from when a user starts speaking
             # until we receive the first transcript. However, Deepgram Flux delivers
